@@ -7,7 +7,7 @@ void setup() {
   pinMode(buzzerPin, OUTPUT);
   pinMode(ledPin, OUTPUT);
 
-  // Play the clanging metal sound
+  // Play the clanging metal sound with LED blinking
   playClangingMetalSound();
 }
 
@@ -22,10 +22,13 @@ void playClangingMetalSound() {
   for (int i = 0; i < sizeof(melody) / sizeof(melody[0]); i++) {
     if (melody[i] != 0) {
       tone(buzzerPin, melody[i], noteDurations[i]);
+      digitalWrite(ledPin, HIGH); // Turn on the LED
       delay(noteDurations[i] + 20); // Add a small delay between tones
     } else {
       noTone(buzzerPin); // Rest
+      digitalWrite(ledPin, LOW); // Turn off the LED
       delay(noteDurations[i] + 20);
     }
   }
+  digitalWrite(ledPin, LOW); // Turn off the LED after the loop ends
 }
